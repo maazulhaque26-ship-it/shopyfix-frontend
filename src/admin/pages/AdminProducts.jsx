@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import API from '../../services/api';
 
 // Fix image URLs for local uploads
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '');
+const API_BASE = (import.meta.env.VITE_API_URL || 'https://shopyfix-backend.onrender.com').replace('/api', '');
 
 function imgSrc(url) {
   if (!url) return null;

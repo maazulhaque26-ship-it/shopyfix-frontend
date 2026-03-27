@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import API from '../services/api';
 import { addToCart, toggleWishlist } from '../redux/slices/shopSlices';
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '');
+const API_BASE = (import.meta.env.VITE_API_URL || 'https://shopyfix-backend.onrender.com').replace('/api', '');
 
 function imgSrc(url) {
   if (!url) return 'https://via.placeholder.com/400x400?text=No+Image';
