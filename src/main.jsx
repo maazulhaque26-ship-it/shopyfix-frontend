@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import store from './redux/store';
 import App from './App';
 import './index.css';
+import './responsive.css'   
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

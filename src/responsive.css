@@ -1,0 +1,234 @@
+/* ============================================================
+   SHOPIFIX — MOBILE RESPONSIVE FIXES
+   Add this file to frontend/src/responsive.css
+   Then import it in main.jsx:  import './responsive.css';
+   ============================================================ */
+
+/* ── NAVBAR ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Top bar: stack logo + search vertically */
+  header > div:first-child > div {
+    flex-wrap: wrap;
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+
+  /* Logo stays full width row */
+  header a[href="/"] {
+    font-size: 22px !important;
+  }
+
+  /* Search takes full width on mobile */
+  header form {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    order: 3;
+    flex: 1 1 100% !important;
+  }
+
+  /* Right icons shrink gap */
+  header > div:first-child > div > div:last-child {
+    gap: 10px !important;
+    margin-left: 0 !important;
+  }
+
+  /* Category bar: smaller text */
+  header > div:last-child a {
+    font-size: 11px !important;
+    padding: 5px 8px !important;
+  }
+}
+
+/* ── HERO CAROUSEL ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Shorter hero on mobile */
+  div[style*="height: 300px"] {
+    height: 220px !important;
+  }
+
+  /* Smaller heading */
+  div[style*="height: 300px"] h1 {
+    font-size: 22px !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Smaller subtext */
+  div[style*="height: 300px"] p {
+    font-size: 13px !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* Smaller CTA button */
+  div[style*="height: 300px"] button {
+    padding: 9px 18px !important;
+    font-size: 13px !important;
+  }
+
+  /* Hide the big background house emoji */
+  div[style*="height: 300px"] > div > div:last-child {
+    display: none !important;
+  }
+}
+
+/* ── PROMO STRIP ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  div[style*="background: #131921"] > div {
+    gap: 12px !important;
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    flex-wrap: nowrap !important;
+    padding: 8px 12px !important;
+    scrollbar-width: none;
+  }
+
+  div[style*="background: #131921"] span {
+    white-space: nowrap;
+    font-size: 12px !important;
+  }
+}
+
+/* ── PRODUCT CARDS ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Cards in horizontal scroll: slightly smaller on mobile */
+  .premium-card {
+    width: 160px !important;
+    min-width: 160px !important;
+  }
+
+  .premium-card > div:first-child {
+    height: 130px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-card {
+    width: 145px !important;
+    min-width: 145px !important;
+  }
+
+  .premium-card > div:first-child {
+    height: 115px !important;
+  }
+}
+
+/* ── CATEGORIES SECTION ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Category pill buttons */
+  div[style*="minWidth: 100"] {
+    min-width: 80px !important;
+    padding: 10px 12px !important;
+  }
+
+  div[style*="minWidth: 100"] > div:first-child {
+    font-size: 26px !important;
+  }
+
+  div[style*="minWidth: 100"] > div:last-child {
+    font-size: 11px !important;
+  }
+}
+
+/* ── MAIN CONTENT PADDING ────────────────────────────────────── */
+@media (max-width: 768px) {
+  div[style*="maxWidth: 1200"] {
+    padding: 16px 12px !important;
+  }
+
+  /* Section headings */
+  h2[style*="fontSize: 20"] {
+    font-size: 17px !important;
+  }
+}
+
+/* ── DEALS TIMER ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Timer badge smaller */
+  div[style*="background: #ef4444"][style*="borderRadius: 20"] {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+  }
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  footer > div {
+    flex-direction: column !important;
+    gap: 24px !important;
+    padding: 24px 16px !important;
+  }
+
+  footer h3, footer h4 {
+    font-size: 15px !important;
+  }
+}
+
+/* ── LOGIN / REGISTER PAGES ──────────────────────────────────── */
+@media (max-width: 480px) {
+  form[style*="maxWidth"] {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 16px !important;
+  }
+}
+
+/* ── PRODUCT LISTING PAGE ────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Sidebar filter: hidden by default on mobile handled by component */
+  /* Product grid: 2 columns on mobile */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Very small screens: still 2 cols but tighter */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+}
+
+/* ── CART PAGE ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Cart layout: single column */
+  div[style*="gridTemplateColumns"][style*="1fr 380px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── CHECKOUT PAGE ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  div[style*="gridTemplateColumns"][style*="1fr 360px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── PROFILE PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  div[style*="gridTemplateColumns"][style*="260px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── GLOBAL TOUCH IMPROVEMENTS ───────────────────────────────── */
+@media (max-width: 768px) {
+  /* Bigger tap targets */
+  button {
+    min-height: 36px;
+  }
+
+  /* Prevent text overflow everywhere */
+  * {
+    word-break: break-word;
+  }
+
+  /* Hide horizontal scrollbar globally */
+  body {
+    overflow-x: hidden;
+  }
+}
