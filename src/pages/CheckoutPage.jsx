@@ -434,7 +434,7 @@ function CheckoutForm() {
                         {img ? (
                           <img
                             src={img.startsWith('/uploads/')
-                              ? `${(import.meta.env.VITE_API_URL || 'https://shopyfix-backend.onrender.com').replace('/api', '')}${img}`
+                              ? `${(import.meta.env.VITE_API_URL || '').replace('/api', '')}${img}`
                               : img}
                             alt=""
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}

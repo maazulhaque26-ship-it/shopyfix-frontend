@@ -157,7 +157,7 @@ export default function OrdersPage() {
                             {item.image ? (
                               <img
                                 src={item.image.startsWith('/uploads/')
-                                  ? `${(import.meta.env.VITE_API_URL || 'https://shopyfix-backend.onrender.com').replace('/api', '')}${item.image}`
+                                  ? `${(import.meta.env.VITE_API_URL || '').replace('/api', '')}${item.image}`
                                   : item.image}
                                 alt={item.name}
                                 className="w-full h-full object-cover"

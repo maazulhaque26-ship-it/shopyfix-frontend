@@ -1,10 +1,8 @@
 // Utility to fix image URLs
 // Local uploads are stored as /uploads/filename.jpg
-// They need to be served from the backend: http://localhost:5000/uploads/filename.jpg
+// They need to be prefixed with the backend base URL
 
-const API_BASE = import.meta.env.VITE_API_URL
-  ? import.meta.env.VITE_API_URL.replace('/api', '')
-  : 'https://shopyfix-backend.onrender.com';
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace('/api', '');
 
 export function getImageUrl(url) {
   if (!url) return null;

@@ -54,7 +54,7 @@ export default function AdminSubscribers() {
   const handleExport = () => {
     // Opens CSV download directly from backend
     const token = localStorage.getItem('token');
-    const base  = import.meta.env.VITE_API_URL || 'https://shopyfix-backend.onrender.com';
+    const base  = import.meta.env.VITE_API_URL || '';
     window.open(`${base}/admin/subscribers/export?token=${token}`, '_blank');
   };
 

@@ -6,7 +6,7 @@ import API from '../services/api';
 import { addToCart, toggleWishlist } from '../redux/slices/shopSlices';
 import useScrollReveal from '../hooks/useScrollReveal';
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'https://shopyfix-backend.onrender.com').replace('/api', '');
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace('/api', '');
 
 function imgSrc(url) {
   if (!url) return null;

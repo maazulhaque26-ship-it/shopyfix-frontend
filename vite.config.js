@@ -6,9 +6,11 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      // Local dev only — Vercel ignores this entirely
       '/api': {
         target: 'https://shopyfix-backend.onrender.com',
         changeOrigin: true,
+        secure: true,
       },
     },
   },

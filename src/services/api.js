@@ -1,63 +1,46 @@
-/**
- * api.js — Professional Audit Fix
- *
- * CRITICAL BUG FIXED:
- * window.location.href = '/login' causes a FULL browser page reload which:
- *   - Wipes React from memory → blank white screen until JS re-parses
- *   - Destroys Redux store → user sees blank then flicker
- *   - Breaks payment flows (Stripe/Razorpay callback → redirect → lost order)
- *
- * FIX: Dispatch a custom DOM event 'auth:expired' that App.jsx listens to.
- *   App.jsx handles it with navigate() (React Router) = no reload, no blank screen.
- *
- * OTHER FIXES:
- * 1. Added timeout to prevent hung requests (15s)
- * 2. Payment paths are excluded from auth redirect (prevents logout mid-payment)
- * 3. Added request ID header for debugging
- */
-import axios from 'axios';
+import axios from "axios";
 
-const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+// LOCAL DEV:  VITE_API_URL is empty → vite proxy kicks in → /api/* → backend
+// PRODUCTION: VITE_API_URL = "https://shopyfix-backend.onrender.com" (set in Vercel dashboard)
+const BASE_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+
+const api = axios.create({
+  baseURL: BASE_URL,
   withCredentials: true,
-  timeout: 15000, // FIX: prevent hung requests
+  headers: { "Content-Type": "application/json" },
 });
 
-// ── Request: attach JWT token ─────────────────────────────────────
-API.interceptors.request.use(
+// ── Request interceptor: attach JWT ─────────────────────────────────────────
+api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    const token = localStorage.getItem("token");
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// ── Response: handle auth errors WITHOUT page reload ──────────────
-API.interceptors.response.use(
+// ── Response interceptor: handle 401 ────────────────────────────────────────
+api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const status = error.response?.status;
-    const path   = window.location.pathname;
-
-    // Never redirect during payment — user would lose their order
-    const isPaymentPath = ['/checkout', '/order-success', '/payment']
-      .some(p => path.includes(p));
-
-    if (status === 401 && !isPaymentPath && path !== '/login' && path !== '/register') {
-      // Clear storage
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-
-      // FIX: dispatch event instead of window.location.href
-      // App.jsx listener calls navigate('/login') — no page reload
-      window.dispatchEvent(new CustomEvent('auth:expired'));
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
     }
-
     return Promise.reject(error);
   }
 );
 
-export default API;
+// ── Auth ─────────────────────────────────────────────────────────────────────
+// Paths keep full /api/... prefix so they work in BOTH environments:
+//   Local:      "" + "/api/auth/login" → vite proxy → backend ✅
+//   Production: "https://...onrender.com" + "/api/auth/login"  ✅
+export const loginUser      = (data) => api.post("/api/auth/login", data);
+export const registerUser   = (data) => api.post("/api/auth/register", data);
+export const getCurrentUser = ()     => api.get("/api/auth/me");
+
+// ── Other routes (add yours here) ────────────────────────────────────────────
+// export const getProducts   = ()     => api.get("/api/products");
+// export const getCategories = ()     => api.get("/api/categories");
+
+export default api;
