@@ -1,0 +1,1 @@
+export { default, AdminRoute } from './index.jsx';
